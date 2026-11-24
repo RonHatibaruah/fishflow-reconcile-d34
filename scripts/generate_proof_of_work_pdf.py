@@ -27,25 +27,25 @@ class NumberedCanvas(canvas.Canvas):
 
     def draw_page_decorations(self, page_count):
         self.saveState()
-        
-        # Suppress running header/footer on cover page (page 1)
         if self._pageNumber > 1:
-            # Header
+            self.setFont("Helvetica-Bold", 8)
+            self.setFillColor(colors.HexColor("#0284C7"))
+            self.drawString(54, letter[1] - 34, "NESFIC-D-34: Proof of Work & Technical Evidence | MatsyaFlow-Assam")
             self.setFont("Helvetica", 8)
             self.setFillColor(colors.HexColor("#64748B"))
-            self.drawString(54, letter[1] - 36, "NESFIC-D-34: Proof of Work & Technical Evidence | MatsyaFlow-Assam")
+            self.drawRightString(letter[0] - 54, letter[1] - 34, "Directorate of Fisheries, Govt of Assam")
             self.setStrokeColor(colors.HexColor("#CBD5E1"))
             self.setLineWidth(0.5)
-            self.line(54, letter[1] - 42, letter[0] - 54, letter[1] - 42)
+            self.line(54, letter[1] - 40, letter[0] - 54, letter[1] - 40)
             
-            # Footer
             self.setFont("Helvetica", 8)
             self.setFillColor(colors.HexColor("#64748B"))
-            self.drawString(54, 36, "Confidential — Submitted to Assam Innovation & Startup Foundation (AISF) & Directorate of Fisheries")
+            self.drawString(54, 34, "Confidential — Submitted to Assam Innovation & Startup Foundation (AISF) & Directorate of Fisheries")
             page_text = f"Page {self._pageNumber} of {page_count}"
-            self.drawRightString(letter[0] - 54, 36, page_text)
-            self.line(54, 46, letter[0] - 54, 46)
-            
+            self.drawRightString(letter[0] - 54, 34, page_text)
+            self.setStrokeColor(colors.HexColor("#CBD5E1"))
+            self.setLineWidth(0.5)
+            self.line(54, 44, letter[0] - 54, 44)
         self.restoreState()
 
 def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
@@ -60,48 +60,35 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
 
     styles = getSampleStyleSheet()
 
-    # Custom typography styles
     title_style = ParagraphStyle(
         'DocTitle',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=22,
-        leading=26,
+        fontSize=20,
+        leading=24,
         textColor=colors.HexColor('#0F172A'),
-        spaceAfter=8
+        spaceAfter=6
     )
     
     subtitle_style = ParagraphStyle(
         'DocSubtitle',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=12,
-        leading=16,
+        fontSize=11,
+        leading=15,
         textColor=colors.HexColor('#0284C7'),
-        spaceAfter=15
+        spaceAfter=12
     )
 
     h1_style = ParagraphStyle(
         'SectionH1',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=14,
-        leading=18,
+        fontSize=12.5,
+        leading=16,
         textColor=colors.HexColor('#0F172A'),
-        spaceBefore=14,
-        spaceAfter=6,
-        keepWithNext=True
-    )
-
-    h2_style = ParagraphStyle(
-        'SectionH2',
-        parent=styles['Normal'],
-        fontName='Helvetica-Bold',
-        fontSize=11,
-        leading=15,
-        textColor=colors.HexColor('#1E293B'),
-        spaceBefore=10,
-        spaceAfter=4,
+        spaceBefore=12,
+        spaceAfter=5,
         keepWithNext=True
     )
 
@@ -109,28 +96,18 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
         'BodyDark',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9.2,
-        leading=13.5,
-        textColor=colors.HexColor('#334155'),
-        spaceAfter=6
-    )
-
-    callout_style = ParagraphStyle(
-        'CalloutText',
-        parent=styles['Normal'],
-        fontName='Helvetica-Oblique',
         fontSize=8.8,
         leading=13.0,
-        textColor=colors.HexColor('#0369A1'),
-        spaceAfter=4
+        textColor=colors.HexColor('#334155'),
+        spaceAfter=6
     )
 
     table_cell = ParagraphStyle(
         'TableCell',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.2,
-        leading=11.5,
+        fontSize=8.0,
+        leading=11.0,
         textColor=colors.HexColor('#1E293B')
     )
 
@@ -138,8 +115,8 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
         'TableHeader',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=8.5,
-        leading=12,
+        fontSize=8.2,
+        leading=11.5,
         textColor=colors.HexColor('#FFFFFF')
     )
 
@@ -148,36 +125,35 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     # -------------------------------------------------------------------------
     # COVER / HEADER BLOCK
     # -------------------------------------------------------------------------
-    story.append(Paragraph("PROOF OF WORK & TECHNICAL EVIDENCE", title_style))
+    story.append(Paragraph("PROOF OF WORK & TECHNICAL EVIDENCE DOSSIER", title_style))
     story.append(Paragraph("<b>Problem Statement NESFIC-D-34:</b> Fish-Flow and Market Data for Independent Validation of Annual Fish Production Estimates", subtitle_style))
     
-    # Meta Box
     meta_data = [
         [Paragraph("<b>Challenge:</b> North East Seva First Innovation Challenge (NESFIC) 2026", table_cell),
          Paragraph("<b>Target Department:</b> Directorate of Fisheries, Govt of Assam", table_cell)],
         [Paragraph("<b>Proposed Solution:</b> MatsyaFlow-Assam Triangulation Engine", table_cell),
          Paragraph("<b>Submission Track:</b> Departmental / Government Innovation", table_cell)],
         [Paragraph("<b>Total Grant Allocation:</b> ₹40.00 Lakhs (40 lacs)", table_cell),
-         Paragraph("<b>Engineering Team Allocation:</b> ₹20.00 Lakhs (50%)", table_cell)]
+         Paragraph("<b>Engineering Team Allocation:</b> ₹20.00 Lakhs (50.0%)", table_cell)]
     ]
     t_meta = Table(meta_data, colWidths=[250, 254])
     t_meta.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#F1F5F9')),
         ('BOX', (0,0), (-1,-1), 1.0, colors.HexColor('#CBD5E1')),
         ('INNERGRID', (0,0), (-1,-1), 0.5, colors.HexColor('#E2E8F0')),
-        ('TOPPADDING', (0,0), (-1,-1), 6),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
-        ('LEFTPADDING', (0,0), (-1,-1), 8),
-        ('RIGHTPADDING', (0,0), (-1,-1), 8),
+        ('TOPPADDING', (0,0), (-1,-1), 5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+        ('LEFTPADDING', (0,0), (-1,-1), 7),
+        ('RIGHTPADDING', (0,0), (-1,-1), 7),
     ]))
     story.append(t_meta)
-    story.append(Spacer(1, 14))
+    story.append(Spacer(1, 10))
 
     # -------------------------------------------------------------------------
     # 1. Executive Summary & Problem Resolution
     # -------------------------------------------------------------------------
     story.append(Paragraph("1. Executive Summary & Problem Formulation", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=8))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     p1 = ("Assam’s fisheries sector generates critical economic value across flood-plain beels, community tanks, and riverine networks. "
           "However, official annual fish production figures historically rely on self-reported farmer declarations and localized surveys, "
@@ -186,18 +162,23 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
           "imported from Andhra Pradesh and West Bengal, while remote local catches bypass formal markets entirely.")
     story.append(Paragraph(p1, body_style))
 
-    p2 = ("<b>MatsyaFlow-Assam</b> delivers the first empirical, closed-loop Mass-Balance Triangulation Engine. By pairing digital checkpost manifests "
-          "at border gateways (Srirampur, Boxirhat) with wholesale mandi disappearance telemetry (Uzanbazar, Betkuchi) and rural consumption baselines, "
-          "it mathematically reconciles native production within a rigorous ±5-7% confidence interval.")
-    story.append(Paragraph(p2, body_style))
+    # Embed Market Fallacy Graphic
+    if os.path.exists("assets/market_fallacy_infographic.png"):
+        story.append(Image("assets/market_fallacy_infographic.png", width=6.5*inch, height=3.35*inch))
+        story.append(Spacer(1, 6))
 
-    story.append(Spacer(1, 8))
+    # Embed Assam Strategic Corridors Map
+    if os.path.exists("assets/assam_corridor_map.png"):
+        story.append(Image("assets/assam_corridor_map.png", width=6.5*inch, height=3.9*inch))
+        story.append(Spacer(1, 6))
+
+    story.append(PageBreak())
 
     # -------------------------------------------------------------------------
     # 2. End-to-End User Journey & Workflow
     # -------------------------------------------------------------------------
     story.append(Paragraph("2. End-to-End User Journeys", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=8))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
 
     journeys = [
         [Paragraph("<b>Role</b>", table_header), Paragraph("<b>Operational Trigger & Interaction</b>", table_header), Paragraph("<b>Output / Data Ingestion</b>", table_header)],
@@ -222,28 +203,31 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
         ('RIGHTPADDING', (0,0), (-1,-1), 6),
     ]))
     story.append(t_journey)
-
-    story.append(PageBreak())
+    story.append(Spacer(1, 10))
 
     # -------------------------------------------------------------------------
     # 3. UI Wireframes & Mockups
     # -------------------------------------------------------------------------
     story.append(Paragraph("3. Interface Wireframes & Edge Prototype Screens", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=8))
-    story.append(Paragraph("The platform features three purpose-built interfaces engineered for low-friction operation across noisy wholesale yards and remote highway checkpoints:", body_style))
-    
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     if os.path.exists("assets/wireframes_dashboard.png"):
-        story.append(Image("assets/wireframes_dashboard.png", width=6.8*inch, height=4.08*inch))
+        story.append(Image("assets/wireframes_dashboard.png", width=6.6*inch, height=3.96*inch))
     story.append(Spacer(1, 10))
 
+    story.append(PageBreak())
+
     # -------------------------------------------------------------------------
-    # 4. Solution Architecture & Technical Stack
+    # 4. Solution Architecture & Hardware Kit Blueprint
     # -------------------------------------------------------------------------
-    story.append(Paragraph("4. Solution Architecture & Technical Implementation", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=8))
+    story.append(Paragraph("4. Solution Architecture & Edge Hardware Kit", h1_style))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     if os.path.exists("assets/system_architecture.png"):
-        story.append(Image("assets/system_architecture.png", width=6.8*inch, height=4.25*inch))
+        story.append(Image("assets/system_architecture.png", width=6.6*inch, height=4.12*inch))
+        story.append(Spacer(1, 6))
+
+    if os.path.exists("assets/hardware_kit_blueprint.png"):
+        story.append(Image("assets/hardware_kit_blueprint.png", width=6.6*inch, height=3.57*inch))
     story.append(Spacer(1, 10))
 
     story.append(PageBreak())
@@ -252,15 +236,15 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     # 5. Mathematical Formulation & Mass-Balance Model
     # -------------------------------------------------------------------------
     story.append(Paragraph("5. Mathematical Mass-Balance Formulation", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=8))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     p_math = ("To scientifically decouple production from raw market sales, MatsyaFlow formulates the fisheries economy as a closed "
               "hydrodynamic balance across each administrative district <i>i</i> during time interval <i>t</i>:")
     story.append(Paragraph(p_math, body_style))
 
     if os.path.exists("assets/mass_balance_flow.png"):
-        story.append(Image("assets/mass_balance_flow.png", width=6.8*inch, height=3.85*inch))
-    story.append(Spacer(1, 8))
+        story.append(Image("assets/mass_balance_flow.png", width=6.6*inch, height=3.74*inch))
+        story.append(Spacer(1, 6))
 
     formula_desc = [
         [Paragraph("<b>Component Variable</b>", table_header), Paragraph("<b>Empirical Source & Modeling Approach</b>", table_header), Paragraph("<b>Statistical Role</b>", table_header)],
@@ -289,15 +273,15 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     # 6. Empirical Simulation & Prototype Results
     # -------------------------------------------------------------------------
     story.append(Paragraph("6. Empirical Simulation & Prototype Validation Results", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=8))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     p_sim = ("The reconciliation engine was benchmarked against a 12-month synthetic simulation model calibrated to historical "
              "Assam Fisheries statistical returns (2021–2025) and empirical logistics flows across three pilot districts:")
     story.append(Paragraph(p_sim, body_style))
 
     if os.path.exists("assets/pilot_simulation_chart.png"):
-        story.append(Image("assets/pilot_simulation_chart.png", width=6.8*inch, height=3.11*inch))
-    story.append(Spacer(1, 8))
+        story.append(Image("assets/pilot_simulation_chart.png", width=6.6*inch, height=3.02*inch))
+        story.append(Spacer(1, 6))
 
     sim_table = [
         [Paragraph("<b>Pilot District</b>", table_header), Paragraph("<b>District Character</b>", table_header), Paragraph("<b>Traditional Survey MAPE</b>", table_header), Paragraph("<b>MatsyaFlow Reconciled MAPE</b>", table_header), Paragraph("<b>Variance Reduction</b>", table_header)],
@@ -322,15 +306,12 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     # 7. Field Pilot & UAT Validation Roadmap
     # -------------------------------------------------------------------------
     story.append(Paragraph("7. Field Pilot Deployment & Validation Protocol", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=8))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
-    pilot_p = ("A 60-day live field validation will be executed during Months 7–8 across Kamrup Metro, Nagaon, and Cachar. "
-               "The pilot deploys 8 ruggedized edge terminals at border gateways (Srirampur, Boxirhat, Khanapara) and 6 Bluetooth weighing bridges "
-               "at key mandis. Live streaming telemetry will run concurrently alongside conventional departmental FDO returns to establish "
-               "the state's definitive statistical validation benchmark.")
-    story.append(Paragraph(pilot_p, body_style))
+    if os.path.exists("assets/pilot_district_profiles.png"):
+        story.append(Image("assets/pilot_district_profiles.png", width=6.6*inch, height=3.3*inch))
+        story.append(Spacer(1, 6))
 
-    # Verification Sign-off Box
     sign_box = [
         [Paragraph("<b>DOCUMENT AUTHENTICATION & PROOF OF WORK CERTIFICATION</b>", table_header), Paragraph("", table_header)],
         [Paragraph("<b>Lead Institution / Startup:</b> MatsyaFlow Consortium<br/><b>Lead Technical Architect:</b> Principal Enterprise Systems Architect<br/><b>Domain Principal Investigator:</b> Ph.D. Fisheries Resource Management", table_cell),
@@ -341,12 +322,12 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#0284C7')),
         ('BACKGROUND', (0,1), (-1,-1), colors.HexColor('#F8FAFC')),
         ('BOX', (0,0), (-1,-1), 1.0, colors.HexColor('#0284C7')),
-        ('TOPPADDING', (0,0), (-1,-1), 6),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
-        ('LEFTPADDING', (0,0), (-1,-1), 8),
-        ('RIGHTPADDING', (0,0), (-1,-1), 8),
+        ('TOPPADDING', (0,0), (-1,-1), 5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+        ('LEFTPADDING', (0,0), (-1,-1), 7),
+        ('RIGHTPADDING', (0,0), (-1,-1), 7),
     ]))
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 6))
     story.append(t_sign)
 
     doc.build(story, canvasmaker=NumberedCanvas)

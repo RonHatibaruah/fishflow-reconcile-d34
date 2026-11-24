@@ -32,7 +32,6 @@ class NumberedCanvas(canvas.Canvas):
     def draw_page_decorations(self, page_count):
         self.saveState()
         if self._pageNumber > 1:
-            # Running Header
             self.setFont("Helvetica-Bold", 8)
             self.setFillColor(colors.HexColor("#0284C7"))
             self.drawString(54, letter[1] - 34, "NESFIC 2026 | GOVERNMENT TRACK PROPOSAL")
@@ -43,7 +42,6 @@ class NumberedCanvas(canvas.Canvas):
             self.setLineWidth(0.5)
             self.line(54, letter[1] - 40, letter[0] - 54, letter[1] - 40)
             
-            # Running Footer
             self.setFont("Helvetica", 8)
             self.setFillColor(colors.HexColor("#64748B"))
             self.drawString(54, 34, "Directorate of Fisheries, Govt of Assam & Assam Innovation & Startup Foundation (AISF)")
@@ -90,11 +88,11 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
         'SectionH1',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=12.5,
-        leading=16,
+        fontSize=12,
+        leading=15.5,
         textColor=colors.HexColor('#0F172A'),
-        spaceBefore=14,
-        spaceAfter=5,
+        spaceBefore=12,
+        spaceAfter=4,
         keepWithNext=True
     )
 
@@ -102,10 +100,10 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
         'SectionH2',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=10,
-        leading=13.5,
+        fontSize=9.5,
+        leading=13,
         textColor=colors.HexColor('#1E293B'),
-        spaceBefore=8,
+        spaceBefore=7,
         spaceAfter=3,
         keepWithNext=True
     )
@@ -114,19 +112,10 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
         'BodyDark',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.8,
-        leading=13.0,
+        fontSize=8.6,
+        leading=12.5,
         textColor=colors.HexColor('#334155'),
-        spaceAfter=6
-    )
-
-    meta_badge_style = ParagraphStyle(
-        'MetaBadge',
-        parent=styles['Normal'],
-        fontName='Helvetica-Bold',
-        fontSize=8,
-        leading=10,
-        textColor=colors.HexColor('#0284C7')
+        spaceAfter=5
     )
 
     table_cell = ParagraphStyle(
@@ -155,7 +144,6 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
     story.append(Paragraph("TECHNICAL & COMMERCIAL PROPOSAL DOSSIER", doc_title_style))
     story.append(Paragraph("<b>Problem Statement NESFIC-D-34:</b> Fish-Flow and Market Data for Independent Validation of Annual Fish Production Estimates", doc_subtitle_style))
     
-    # Executive Metadata Table
     meta_data = [
         [Paragraph("<b>Innovation Challenge:</b> North East Seva First Innovation Challenge (NESFIC) 2026", table_cell),
          Paragraph("<b>Department:</b> Directorate of Fisheries, Govt of Assam", table_cell)],
@@ -177,19 +165,15 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
         ('RIGHTPADDING', (0,0), (-1,-1), 6),
     ]))
     story.append(t_meta)
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 8))
 
     # -------------------------------------------------------------------------
-    # SECTIONS 1 TO 12
+    # SECTIONS 1 TO 12 WITH INTEGRATED DIAGRAMS
     # -------------------------------------------------------------------------
     for title, text in sections.items():
-        words = len(text.split())
-        
-        # Section Header with Word Count Pill
         story.append(Paragraph(f"{title}", h1_style))
-        story.append(HRFlowable(width="100%", thickness=1.2, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
+        story.append(HRFlowable(width="100%", thickness=1.2, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=5))
         
-        # Split text into paragraphs
         paras = text.strip().split("\n\n")
         for p in paras:
             p_clean = p.strip().replace("\n", "<br/>")
@@ -212,16 +196,43 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
             else:
                 story.append(Paragraph(p_clean, body_style))
         
-        # Insert Budget Chart right after Section 12
-        if "12. Resources, risks & pilot validation" in title:
-            story.append(Spacer(1, 6))
-            if os.path.exists("assets/budget_breakdown_chart.png"):
-                story.append(Image("assets/budget_breakdown_chart.png", width=5.8*inch, height=3.35*inch))
+        # Diagram 1: Market Fallacy after Section 1
+        if "1. Problem understanding" in title:
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/market_fallacy_infographic.png"):
+                story.append(Image("assets/market_fallacy_infographic.png", width=6.5*inch, height=3.35*inch))
         
-        story.append(Spacer(1, 8))
+        # Diagram 2: Assam Strategic Corridor Map after Section 2
+        elif "2. Proposed solution" in title:
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/assam_corridor_map.png"):
+                story.append(Image("assets/assam_corridor_map.png", width=6.5*inch, height=3.9*inch))
+        
+        # Diagram 3: System Architecture after Section 4
+        elif "4. Technology & solution architecture" in title:
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/system_architecture.png"):
+                story.append(Image("assets/system_architecture.png", width=6.5*inch, height=4.06*inch))
+
+        # Diagram 4: Implementation Gantt Chart after Section 6
+        elif "6. Development timeline & milestones" in title:
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/implementation_gantt.png"):
+                story.append(Image("assets/implementation_gantt.png", width=6.5*inch, height=3.03*inch))
+
+        # Diagram 5: Budget Donut Chart & Pilot District Profiles after Section 12
+        elif "12. Resources, risks & pilot validation" in title:
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/budget_breakdown_chart.png"):
+                story.append(Image("assets/budget_breakdown_chart.png", width=5.6*inch, height=3.24*inch))
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/pilot_district_profiles.png"):
+                story.append(Image("assets/pilot_district_profiles.png", width=6.5*inch, height=3.25*inch))
+        
+        story.append(Spacer(1, 6))
 
     # Formal Institutional Sign-off Block
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 8))
     sign_box = [
         [Paragraph("<b>OFFICIAL SUBMISSION CERTIFICATION — NESFIC 2026</b>", table_header), Paragraph("", table_header)],
         [Paragraph("<b>Submitted By:</b> MatsyaFlow Consortium<br/><b>Designated Contact:</b> Principal Investigator & Lead Systems Architect<br/><b>Entity Type:</b> Registered Technology Startup & Research Enterprise", table_cell),
