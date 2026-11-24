@@ -177,7 +177,7 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     # -------------------------------------------------------------------------
     # 2. End-to-End User Journey & Workflow
     # -------------------------------------------------------------------------
-    story.append(Paragraph("2. End-to-End User Journeys", h1_style))
+    story.append(Paragraph("2. End-to-End User Journeys & Vernacular Interfaces", h1_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
 
     journeys = [
@@ -203,13 +203,14 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
         ('RIGHTPADDING', (0,0), (-1,-1), 6),
     ]))
     story.append(t_journey)
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 8))
 
-    # -------------------------------------------------------------------------
-    # 3. UI Wireframes & Mockups
-    # -------------------------------------------------------------------------
-    story.append(Paragraph("3. Interface Wireframes & Edge Prototype Screens", h1_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
+    # Embed Multilingual Vernacular UI
+    if os.path.exists("assets/vernacular_edge_ui.png"):
+        story.append(Image("assets/vernacular_edge_ui.png", width=6.6*inch, height=3.96*inch))
+        story.append(Spacer(1, 6))
+
+    # Embed Screen Wireframes
     if os.path.exists("assets/wireframes_dashboard.png"):
         story.append(Image("assets/wireframes_dashboard.png", width=6.6*inch, height=3.96*inch))
     story.append(Spacer(1, 10))
@@ -217,9 +218,9 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     story.append(PageBreak())
 
     # -------------------------------------------------------------------------
-    # 4. Solution Architecture & Hardware Kit Blueprint
+    # 3. Solution Architecture, Edge Hardware & National Interoperability
     # -------------------------------------------------------------------------
-    story.append(Paragraph("4. Solution Architecture & Edge Hardware Kit", h1_style))
+    story.append(Paragraph("3. Solution Architecture, Hardware & Interoperability", h1_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     if os.path.exists("assets/system_architecture.png"):
@@ -228,14 +229,18 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
 
     if os.path.exists("assets/hardware_kit_blueprint.png"):
         story.append(Image("assets/hardware_kit_blueprint.png", width=6.6*inch, height=3.57*inch))
+        story.append(Spacer(1, 6))
+
+    if os.path.exists("assets/interoperability_architecture.png"):
+        story.append(Image("assets/interoperability_architecture.png", width=6.6*inch, height=3.74*inch))
     story.append(Spacer(1, 10))
 
     story.append(PageBreak())
 
     # -------------------------------------------------------------------------
-    # 5. Mathematical Formulation & Mass-Balance Model
+    # 4. Mathematical Formulation & Taxonomic Disaggregation
     # -------------------------------------------------------------------------
-    story.append(Paragraph("5. Mathematical Mass-Balance Formulation", h1_style))
+    story.append(Paragraph("4. Mathematical Mass-Balance & Species Disaggregation", h1_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     p_math = ("To scientifically decouple production from raw market sales, MatsyaFlow formulates the fisheries economy as a closed "
@@ -244,6 +249,10 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
 
     if os.path.exists("assets/mass_balance_flow.png"):
         story.append(Image("assets/mass_balance_flow.png", width=6.6*inch, height=3.74*inch))
+        story.append(Spacer(1, 6))
+
+    if os.path.exists("assets/species_disaggregation_matrix.png"):
+        story.append(Image("assets/species_disaggregation_matrix.png", width=6.6*inch, height=3.41*inch))
         story.append(Spacer(1, 6))
 
     formula_desc = [
@@ -270,9 +279,9 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     story.append(PageBreak())
 
     # -------------------------------------------------------------------------
-    # 6. Empirical Simulation & Prototype Results
+    # 5. Empirical Simulation & Prototype Results
     # -------------------------------------------------------------------------
-    story.append(Paragraph("6. Empirical Simulation & Prototype Validation Results", h1_style))
+    story.append(Paragraph("5. Empirical Simulation & Prototype Validation Results", h1_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     p_sim = ("The reconciliation engine was benchmarked against a 12-month synthetic simulation model calibrated to historical "
@@ -303,13 +312,17 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     story.append(Spacer(1, 10))
 
     # -------------------------------------------------------------------------
-    # 7. Field Pilot & UAT Validation Roadmap
+    # 6. Field Pilot Protocol & Closed-Loop Anomaly Audit
     # -------------------------------------------------------------------------
-    story.append(Paragraph("7. Field Pilot Deployment & Validation Protocol", h1_style))
+    story.append(Paragraph("6. Field Pilot Protocol & Closed-Loop Anomaly Audit", h1_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
     if os.path.exists("assets/pilot_district_profiles.png"):
         story.append(Image("assets/pilot_district_profiles.png", width=6.6*inch, height=3.3*inch))
+        story.append(Spacer(1, 6))
+
+    if os.path.exists("assets/closed_loop_audit_protocol.png"):
+        story.append(Image("assets/closed_loop_audit_protocol.png", width=6.6*inch, height=3.41*inch))
         story.append(Spacer(1, 6))
 
     sign_box = [

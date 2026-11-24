@@ -202,25 +202,43 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
             if os.path.exists("assets/market_fallacy_infographic.png"):
                 story.append(Image("assets/market_fallacy_infographic.png", width=6.5*inch, height=3.35*inch))
         
-        # Diagram 2: Assam Strategic Corridor Map after Section 2
+        # Diagram 2: Assam Strategic Corridor Map & Closed-Loop Protocol after Section 2
         elif "2. Proposed solution" in title:
             story.append(Spacer(1, 4))
             if os.path.exists("assets/assam_corridor_map.png"):
                 story.append(Image("assets/assam_corridor_map.png", width=6.5*inch, height=3.9*inch))
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/closed_loop_audit_protocol.png"):
+                story.append(Image("assets/closed_loop_audit_protocol.png", width=6.5*inch, height=3.35*inch))
         
-        # Diagram 3: System Architecture after Section 4
+        # Diagram 3: Vernacular Edge UI after Section 3
+        elif "3. Describe User Journey" in title:
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/vernacular_edge_ui.png"):
+                story.append(Image("assets/vernacular_edge_ui.png", width=6.5*inch, height=3.9*inch))
+
+        # Diagram 4: System Architecture & Interoperability after Section 4
         elif "4. Technology & solution architecture" in title:
             story.append(Spacer(1, 4))
             if os.path.exists("assets/system_architecture.png"):
                 story.append(Image("assets/system_architecture.png", width=6.5*inch, height=4.06*inch))
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/interoperability_architecture.png"):
+                story.append(Image("assets/interoperability_architecture.png", width=6.5*inch, height=3.68*inch))
 
-        # Diagram 4: Implementation Gantt Chart after Section 6
+        # Diagram 5: Implementation Gantt Chart after Section 6
         elif "6. Development timeline & milestones" in title:
             story.append(Spacer(1, 4))
             if os.path.exists("assets/implementation_gantt.png"):
                 story.append(Image("assets/implementation_gantt.png", width=6.5*inch, height=3.03*inch))
 
-        # Diagram 5: Budget Donut Chart & Pilot District Profiles after Section 12
+        # Diagram 6: Species Matrix after Section 7
+        elif "7. Data & information requirements" in title:
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/species_disaggregation_matrix.png"):
+                story.append(Image("assets/species_disaggregation_matrix.png", width=6.5*inch, height=3.35*inch))
+
+        # Diagram 7: Budget Donut Chart & Pilot District Profiles after Section 12
         elif "12. Resources, risks & pilot validation" in title:
             story.append(Spacer(1, 4))
             if os.path.exists("assets/budget_breakdown_chart.png"):
