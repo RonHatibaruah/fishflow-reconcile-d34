@@ -199,53 +199,56 @@ def build_proposal_pdf(filename="output/NESFIC_D34_Proposal_Document.pdf"):
         # Diagram 1: Market Fallacy after Section 1
         if "1. Problem understanding" in title:
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/market_fallacy_infographic.png"):
-                story.append(Image("assets/market_fallacy_infographic.png", width=6.5*inch, height=3.35*inch))
+            if os.path.exists("assets/infographic_ch01_problem_flow.jpg"):
+                story.append(Image("assets/infographic_ch01_problem_flow.jpg", width=6.5*inch, height=3.63*inch))
         
         # Diagram 2: Assam Strategic Corridor Map & Closed-Loop Protocol after Section 2
         elif "2. Proposed solution" in title:
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/assam_corridor_map.png"):
-                story.append(Image("assets/assam_corridor_map.png", width=6.5*inch, height=3.9*inch))
+            if os.path.exists("assets/infographic_ch02_corridor_map.jpg"):
+                story.append(Image("assets/infographic_ch02_corridor_map.jpg", width=6.5*inch, height=3.63*inch))
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/closed_loop_audit_protocol.png"):
-                story.append(Image("assets/closed_loop_audit_protocol.png", width=6.5*inch, height=3.35*inch))
+            if os.path.exists("assets/infographic_ch09_closed_loop_audit.jpg"):
+                story.append(Image("assets/infographic_ch09_closed_loop_audit.jpg", width=6.5*inch, height=3.63*inch))
         
         # Diagram 3: Vernacular Edge UI after Section 3
         elif "3. Describe User Journey" in title:
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/vernacular_edge_ui.png"):
-                story.append(Image("assets/vernacular_edge_ui.png", width=6.5*inch, height=3.9*inch))
+            if os.path.exists("assets/infographic_ch03_vernacular_ui.jpg"):
+                story.append(Image("assets/infographic_ch03_vernacular_ui.jpg", width=6.5*inch, height=3.63*inch))
 
-        # Diagram 4: System Architecture & Interoperability after Section 4
+        # Diagram 4: System Architecture, Hardware Blueprint & Mass-Balance Engine after Section 4
         elif "4. Technology & solution architecture" in title:
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/system_architecture.png"):
-                story.append(Image("assets/system_architecture.png", width=6.5*inch, height=4.06*inch))
+            if os.path.exists("assets/infographic_ch04_system_architecture.jpg"):
+                story.append(Image("assets/infographic_ch04_system_architecture.jpg", width=6.5*inch, height=3.63*inch))
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/interoperability_architecture.png"):
-                story.append(Image("assets/interoperability_architecture.png", width=6.5*inch, height=3.68*inch))
+            if os.path.exists("assets/infographic_ch05_hardware_kit.jpg"):
+                story.append(Image("assets/infographic_ch05_hardware_kit.jpg", width=6.5*inch, height=3.63*inch))
+            story.append(Spacer(1, 4))
+            if os.path.exists("assets/infographic_ch06_mass_balance_engine.jpg"):
+                story.append(Image("assets/infographic_ch06_mass_balance_engine.jpg", width=6.5*inch, height=3.63*inch))
 
         # Diagram 5: Implementation Gantt Chart after Section 6
         elif "6. Development timeline & milestones" in title:
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/implementation_gantt.png"):
-                story.append(Image("assets/implementation_gantt.png", width=6.5*inch, height=3.03*inch))
+            if os.path.exists("assets/infographic_ch07_implementation_gantt.jpg"):
+                story.append(Image("assets/infographic_ch07_implementation_gantt.jpg", width=6.5*inch, height=3.63*inch))
 
         # Diagram 6: Species Matrix after Section 7
         elif "7. Data & information requirements" in title:
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/species_disaggregation_matrix.png"):
-                story.append(Image("assets/species_disaggregation_matrix.png", width=6.5*inch, height=3.35*inch))
+            if os.path.exists("assets/infographic_ch08_species_matrix.jpg"):
+                story.append(Image("assets/infographic_ch08_species_matrix.jpg", width=6.5*inch, height=3.63*inch))
 
-        # Diagram 7: Budget Donut Chart & Pilot District Profiles after Section 12
+        # Diagram 7: Budget Allocation & Pilot District Validation after Section 12
         elif "12. Resources, risks & pilot validation" in title:
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/budget_breakdown_chart.png"):
-                story.append(Image("assets/budget_breakdown_chart.png", width=5.6*inch, height=3.24*inch))
+            if os.path.exists("assets/infographic_ch11_budget_allocation.jpg"):
+                story.append(Image("assets/infographic_ch11_budget_allocation.jpg", width=6.5*inch, height=3.63*inch))
             story.append(Spacer(1, 4))
-            if os.path.exists("assets/pilot_district_profiles.png"):
-                story.append(Image("assets/pilot_district_profiles.png", width=6.5*inch, height=3.25*inch))
+            if os.path.exists("assets/infographic_ch10_pilot_validation.jpg"):
+                story.append(Image("assets/infographic_ch10_pilot_validation.jpg", width=6.5*inch, height=3.63*inch))
         
         story.append(Spacer(1, 6))
 

@@ -163,13 +163,13 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     story.append(Paragraph(p1, body_style))
 
     # Embed Market Fallacy Graphic
-    if os.path.exists("assets/market_fallacy_infographic.png"):
-        story.append(Image("assets/market_fallacy_infographic.png", width=6.5*inch, height=3.35*inch))
+    if os.path.exists("assets/infographic_ch01_problem_flow.jpg"):
+        story.append(Image("assets/infographic_ch01_problem_flow.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
     # Embed Assam Strategic Corridors Map
-    if os.path.exists("assets/assam_corridor_map.png"):
-        story.append(Image("assets/assam_corridor_map.png", width=6.5*inch, height=3.9*inch))
+    if os.path.exists("assets/infographic_ch02_corridor_map.jpg"):
+        story.append(Image("assets/infographic_ch02_corridor_map.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
     story.append(PageBreak())
@@ -206,8 +206,8 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     story.append(Spacer(1, 8))
 
     # Embed Multilingual Vernacular UI
-    if os.path.exists("assets/vernacular_edge_ui.png"):
-        story.append(Image("assets/vernacular_edge_ui.png", width=6.6*inch, height=3.96*inch))
+    if os.path.exists("assets/infographic_ch03_vernacular_ui.jpg"):
+        story.append(Image("assets/infographic_ch03_vernacular_ui.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
     # Embed Screen Wireframes
@@ -223,16 +223,16 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     story.append(Paragraph("3. Solution Architecture, Hardware & Interoperability", h1_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
-    if os.path.exists("assets/system_architecture.png"):
-        story.append(Image("assets/system_architecture.png", width=6.6*inch, height=4.12*inch))
+    if os.path.exists("assets/infographic_ch04_system_architecture.jpg"):
+        story.append(Image("assets/infographic_ch04_system_architecture.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
-    if os.path.exists("assets/hardware_kit_blueprint.png"):
-        story.append(Image("assets/hardware_kit_blueprint.png", width=6.6*inch, height=3.57*inch))
+    if os.path.exists("assets/infographic_ch05_hardware_kit.jpg"):
+        story.append(Image("assets/infographic_ch05_hardware_kit.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
-    if os.path.exists("assets/interoperability_architecture.png"):
-        story.append(Image("assets/interoperability_architecture.png", width=6.6*inch, height=3.74*inch))
+    if os.path.exists("assets/infographic_ch07_implementation_gantt.jpg"):
+        story.append(Image("assets/infographic_ch07_implementation_gantt.jpg", width=6.6*inch, height=3.68*inch))
     story.append(Spacer(1, 10))
 
     story.append(PageBreak())
@@ -247,12 +247,12 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
               "hydrodynamic balance across each administrative district <i>i</i> during time interval <i>t</i>:")
     story.append(Paragraph(p_math, body_style))
 
-    if os.path.exists("assets/mass_balance_flow.png"):
-        story.append(Image("assets/mass_balance_flow.png", width=6.6*inch, height=3.74*inch))
+    if os.path.exists("assets/infographic_ch06_mass_balance_engine.jpg"):
+        story.append(Image("assets/infographic_ch06_mass_balance_engine.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
-    if os.path.exists("assets/species_disaggregation_matrix.png"):
-        story.append(Image("assets/species_disaggregation_matrix.png", width=6.6*inch, height=3.41*inch))
+    if os.path.exists("assets/infographic_ch08_species_matrix.jpg"):
+        story.append(Image("assets/infographic_ch08_species_matrix.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
     formula_desc = [
@@ -317,12 +317,12 @@ def build_proof_of_work_pdf(filename="output/NESFIC_D34_Proof_of_Work.pdf"):
     story.append(Paragraph("6. Field Pilot Protocol & Closed-Loop Anomaly Audit", h1_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#0284C7'), spaceBefore=2, spaceAfter=6))
     
-    if os.path.exists("assets/pilot_district_profiles.png"):
-        story.append(Image("assets/pilot_district_profiles.png", width=6.6*inch, height=3.3*inch))
+    if os.path.exists("assets/infographic_ch10_pilot_validation.jpg"):
+        story.append(Image("assets/infographic_ch10_pilot_validation.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
-    if os.path.exists("assets/closed_loop_audit_protocol.png"):
-        story.append(Image("assets/closed_loop_audit_protocol.png", width=6.6*inch, height=3.41*inch))
+    if os.path.exists("assets/infographic_ch09_closed_loop_audit.jpg"):
+        story.append(Image("assets/infographic_ch09_closed_loop_audit.jpg", width=6.6*inch, height=3.68*inch))
         story.append(Spacer(1, 6))
 
     sign_box = [
